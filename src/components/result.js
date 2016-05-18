@@ -1,14 +1,14 @@
 import React from 'react';
-var Result = ({tsaTime, driveTime}) => (
+var Result = ({tsaTime, driveTime, totalTime}) => (
   <div >
     <div >
-      Total Time: {tsaTime + driveTime} Minutes
+      Total Time: {totalTime} 
     </div>
     <div>
-      TSA Time: {tsaTime} Minutes
+      TSA Wait Time: {tsaTime} 
     </div>
     <div>
-      Drive Time: {driveTime} Minutes
+      Drive Time: {driveTime} 
     </div>
   </div>
 );

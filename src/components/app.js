@@ -2,76 +2,88 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Request from './request.js';
 import Result from './result.js';
+import $ from 'jquery';
+import TSA from './TSACheckpointData.js';
 
 
 class App extends React.Component {
 	constructor(props){
-		super(props)
+		super(props);
 		this.state= {
-			totalTime: undefined,
-			tsaTime: undefined,
-			driveTime: undefined
+			totalTime: '',
+			tsaTime: '',
+			driveTime: '',
+			lat: 33.9485094,
+			lng: -118.3995575
 		}
 	}
+    
+    fetchTSA(terminal, callback){
+  
+     $.ajax({
+	 url: '/tsa',
+	 dataType: 'json',
+	 type: 'GET',
+	 success: function onSuccess(resp){
 
-	// fetchGoogle(address, terminal){
-	  
- //        $.ajax({
-	//       url: 'https://maps.googleapis.com/maps/api/directions/json?origin='+address+'&destination=place_id:ChIJsYC5DCyxwoARn4RMcIy9sSs&key=AIzaSyANP9kpB75a-eKRlvXSOlG7sLzC5ylsfyo',
-	//       data: options,
-	//  	  cache: false,
-	//  	  dataType: 'json',
-	//       type: 'POST',
-	//       success: function onSuccess(resp){
-	// 			this.setDriveTime.bind(this);
-	// 			this.fetchTSA.bind(this, terminal, this.setTsaTime.bind(this));				
-	// 		},
-	//       error: function onError(jq,statusText,errText){
- //            reject();
- //             },
-	 
- //     });
-	// }
+       callback(resp, terminal);
+			},
+	 error: function onError(jq,statusText,errText){
+       console.log("Error");
+	    },	 
+   });
+     
+};
+   fetchGoogle(address, callback){
+   	     $.ajax({
+   		 url: '/google',
+   		 data: address,
+   		 dataType: 'text',
+   		 type: 'POST',
+   		 success: function onSuccess(resp){
+   		 	console.log('Success inside Google', resp);
+   		 	console.log(resp);
+   	        callback(resp);
+   				},
+   		 error: function onError(jq,statusText,errText){
+   	       console.log("Error");
+   		    },	 
+   	   });
+   }
 
-	// fetchTSA(terminal, callback) {
- //     $.ajax({
-	//    url: 'http://apps.tsa.dhs.gov/MyTSAWebService/GetWaitTimes.ashx?ap=LAX&output=json',
-	//    data: options,
-	//    cache: false,
-	//    dataType: 'json',
-	//    type: 'GET',
-	//    success: function onSuccess(resp){
-	// 			callback(resp);
-	// 	},
-	//    error: function onError(jq,statusText,errText){
- //         console.log("Error");
- //        },
-	 
- //    });
-	// }
+   sortData(data, terminal){
+     var waitTimes= data[0].WaitTimes;
+     for (var i= 0; i< waitTimes.length; i++){
+       if (waitTimes[i].CheckpointIndex == terminal){   
+         this.setState({tsaTime: ((parseInt(waitTimes[i].WaitTimeIndex, 10) -1) * 10) +' Minutes'});
+       	  break;
+       	}
+        else if (i === waitTimes.length -1){
+          this.setState({tsaTime: 20});
+        }
+      }
+      var data= JSON.parse(data[1]);
+      this.setState({driveTime: parseInt(data.routes[0].legs[0].duration.text, 10) +' Minutes'});
+      this.setState({totalTime: (parseInt(this.state.driveTime, 10) + parseInt(this.state.tsaTime,10)) + ' Minutes'});
 
-	// setDriveTime(resp){
-	// 	this.setState({driveTime: parseInt(resp.routes[0].legs[0].duration.text, 10)})
-	// }
-
-	// setTsaTime(resp){
-	// 	console.log('Inside setTSA ', resp)
-	// 	this.setState({tsaTime: 4});
-	// }
+   }
 
 	render () {
 		return (
-        <div>
-          FLGHTMKR
-          <div>
-            <Request />
-          </div>
-          <div>
-            <Result tsaTime= {this.state.tsaTime} driveTime= {this.state.driveTime}/>
-          </div>
-        </div>
-
-
+	        <div>
+	          <div class="page-header">
+	            <h1>FLGHTMKR</h1>
+	          </div>
+	          <div className="col-md-6">
+	            <Request fetchTSA= {this.fetchTSA.bind(this)} fetchGoogle= {this.fetchGoogle.bind(this)} sortData= {this.sortData.bind(this)}/>
+	          </div>
+	          <div className="col-md-6">
+	            <Result tsaTime= {this.state.tsaTime} driveTime= {this.state.driveTime} totalTime= {this.state.totalTime} />
+	          </div>
+	          
+	            
+	          
+	        </div>
 		);
 	}
 };

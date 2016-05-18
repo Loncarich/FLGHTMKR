@@ -18,8 +18,5 @@ module.exports= {
           ".jsx"
 		]
 	},
-       devServer: {
-    historyApiFallback: true,
-    contentBase: './'
-  }
+
 };
