@@ -1,6 +1,6 @@
 
-FLGHTMKR
-Reduce the stress of traveling by using FLGHTMKR to calculate your door-to-airline-gate travel time.
+FLGHTMKR</br >
+Reduce the stress of traveling by using FLGHTMKR to calculate your door-to-airline-gate travel time. </br >
 
 Overview
 
@@ -16,12 +16,12 @@ Run locally
 
 Developer Documentation
 
-Libraries Used:
+Tools Used:</br >
 
-React
-Material UI
-Node.js
-Express.js
+React</br >
+Material UI</br >
+Node.js</br >
+Express.js</br >
 
 Front-End
 
