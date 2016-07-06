@@ -1,48 +1,36 @@
 
-# MVP (Solo) Project
+FLGHTMKR
+Reduce the stress of traveling by using FLGHTMKR to calculate your door-to-airline-gate travel time.
 
-### Overview:
+Overview
 
-You have 36 hours to produce something compelling using the skills you've honed over the past five weeks. 
+FLGHTMKR is a single-page web application that aggregates both the travel time from your location to LAX and the TSA wait time upon arriving at LAX. Simply enter your current address and your terminal number and FLGHTMKR will calculate your door-to-airline-gate travel time. FLGHTMKR eliminates the risk of missing your flight due to unforeseen traffic and also takes away the inconvenience of overestimating TSA wait times, arriving too early for your flight, and wasting hours at the airport.
 
-__Q:__ What are your inputs?
-<br>
-__A:__ 36 hours of (relatively) undivided attention
+Run locally
 
-__Q:__ What is the required output?
-<br>
-__A:__ A compelling product presentation delivered to your classmates.
+1. Fork and clone this repo.
+2. In your terminal within the root directory, type: npm install
+3. In two more tabs, type mongod in one, and webpack --watch in the other
+4. In the first tab, type npm start
+5. Visit http://localhost:300/
 
+Developer Documentation
 
-### Getting Started:
+Libraries Used:
 
-To build on your learning of core engineering concepts, we will begin thinking about how to actually manage projects. Engineering management is a deep skill and discipline with lots of history and academic writing. We will focus on just some highlights of content to give a very brief context of how we arrive here.
+React
+Material UI
+Node.js
+Express.js
 
-* Use an [Iterative and incremental development process](http://en.wikipedia.org/wiki/Iterative_and_incremental_development) instead of a [Waterfall Process](http://en.wikipedia.org/wiki/Waterfall_model)
+Front-End
 
-<!--
-*  [Agile](http://en.wikipedia.org/wiki/Agile_software_development) - is a modern eveolution of Iterative and Incremental Development (IID) that further formalizes the IID philosophy with a set of principles and best practices. It also applies Lean Manufacturing process like [Kanban](http://en.wikipedia.org/wiki/Kanban).-->
+The Front-End of this application is built in React and designed using Material UI. It leverages Javascript promises to handle asynchronous API calls to the local server to aggregate the total travel time.
 
-<!--* [Lean Product Process](http://theleanstartup.com/principles) - Takes the essence of Agile Development methodology and applies it more broadly to the development of product and buiness models that support he requirements of the project.
--->
+Server
 
+The server is built using Node.js and Express.js. The server handles RESTful API calls to both the Google Maps and TSA APIs.
 
-## Basic Requirements
-- [ ] Fork the [repo](https://github.com/makersquare/2014-07-solo)
-- Complete the README.md template (<30min)
-  - [ ] Pick an idea (implement a technology, build a product, make art, etc).
-  - [ ] Write it down on paper
-  - [ ] Imagine what portion of this could be done in 24 hours.
-  - [ ] Cut the scope in half.
-  - [ ] Cut the above scope in half again.
-  - [ ] Fill in the README.md template document
-- [ ] Use iterative development (go straight to something that demos your idea)
-- [ ] Prepare for pitch @ demo on Tuesday
+Developed by
 
-
-## Extra Credit
-
-- [ ] Storage - if your app persists data, use a tool like Parse or Firebase. 
-- [ ] Use Liberator, then deploy your app so the whole world can see!
-- [ ] If applicable, use an MVC Framework - Make your app production grade with a full-on MVC. 
-
+Chris Loncarich
