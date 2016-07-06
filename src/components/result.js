@@ -1,14 +1,19 @@
 import React from 'react';
-var Result = ({tsaTime, driveTime, totalTime}) => (
+const styles= {
+  timeStyle: {
+    margin: 5
+  }
+}
+var Result = (props) => (
   <div >
-    <div >
-      Total Time: {totalTime} 
+    <div style= {styles.timeStyle}>
+      Total Travel Time: {props.totalTime}
     </div>
-    <div>
-      TSA Wait Time: {tsaTime} 
+    <div style= {styles.timeStyle}>
+      TSA Wait Time: {props.tsaTime}
     </div>
-    <div>
-      Drive Time: {driveTime} 
+    <div style= {styles.timeStyle}>
+      Drive Time: {props.driveTime}
     </div>
   </div>
 );

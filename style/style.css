@@ -1,0 +1,14 @@
+.container {
+ flex: 1;
+ justify-content: center;
+ align-items: center;
+ text-align: center;
+}
+
+.container-request {
+  flex: 3;
+}
+
+.container-result {
+  flex: 2;
+}
